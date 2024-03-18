@@ -12,11 +12,15 @@
 	<artifactId>chat-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>chat-app</name>
-	<description>Chat application backend</description>
+	<description>Backend of a chat application</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
