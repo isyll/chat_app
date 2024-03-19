@@ -1,26 +1,43 @@
-import 'package:chat_app/theme/custom/text_theme.dart';
+import 'package:chat_app/theme/colors.dart';
+import 'package:chat_app/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  static const inputHeight =
+      EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0);
+  static final inputBorderRadius = BorderRadius.circular(5);
+
   static final darkTheme = ThemeData(
+      inputDecorationTheme: InputDecorationTheme(
+          contentPadding: inputHeight,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: inputBorderRadius,
+            borderSide: BorderSide(color: AppColors.darkColorScheme.tertiary),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: inputBorderRadius,
+            borderSide: BorderSide(color: AppColors.darkColorScheme.primary),
+          )),
       useMaterial3: true,
       brightness: Brightness.dark,
       fontFamily: 'Poppins',
-      colorScheme: const ColorScheme.dark(
-          onBackground: Color(0xffc6c8cd),
-          background: Color(0xff1a2236),
-          primary: Color(0xff0a80ff),
-          secondary: Color(0xffc6c8cd)),
+      colorScheme: AppColors.darkColorScheme,
       textTheme: AppTextTheme.dark);
 
   static final lightTheme = ThemeData(
+      inputDecorationTheme: InputDecorationTheme(
+          contentPadding: inputHeight,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: inputBorderRadius,
+            borderSide: BorderSide(color: AppColors.lightColorScheme.tertiary),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: inputBorderRadius,
+            borderSide: BorderSide(color: AppColors.lightColorScheme.primary),
+          )),
       useMaterial3: true,
       brightness: Brightness.light,
       fontFamily: 'Poppins',
-      colorScheme: const ColorScheme.light(
-          onBackground: Color(0xff212529),
-          background: Colors.white,
-          primary: Color(0xff0a80ff),
-          secondary: Color(0xff212529)),
+      colorScheme: AppColors.lightColorScheme,
       textTheme: AppTextTheme.light);
 }

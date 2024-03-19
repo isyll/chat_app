@@ -1,8 +1,8 @@
-class User {
+class UserModel {
   final String userId;
   final String username;
   final String email;
 
-  const User(
+  const UserModel(
       {required this.userId, required this.email, required this.username});
 }
