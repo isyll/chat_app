@@ -25,9 +25,9 @@ class DiscussionListScreen extends StatelessWidget {
                 ],
               ),
               _SearchField(),
-              //   Consumer<DiscussionSearch>(builder: (context, search, child) {
-              //     return DiscussionList(searchTerm: search.value);
-              //   })
+                Consumer<DiscussionSearch>(builder: (context, search, child) {
+                  return DiscussionList(searchTerm: search.value);
+                })
             ],
           ))),
     );
