@@ -15,4 +15,14 @@ class Message {
   final List<Attachment> attachments;
 
   bool get hasAttachments => attachments.isNotEmpty;
+
+  static Message fromJson(Map<String, dynamic> json) => Message(
+      id: json['id'] as String,
+      userId: json['userId']as String,
+      content: json['content']as String,
+      incoming: json['incoming'] as bool,
+      attachments: Attachment.fromJsonArray(json['attachments']));
+
+  static List<Message> fromJsonArray(List<dynamic> jsonArray) =>
+      jsonArray.map((json) => fromJson(json)).toList();
 }
