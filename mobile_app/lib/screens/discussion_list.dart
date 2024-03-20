@@ -11,25 +11,35 @@ class DiscussionListScreen extends StatelessWidget {
     const title = 'Discussions';
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 34.0),
-          child: _SearchProvider(
-              child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(title, style: Theme.of(context).textTheme.headlineLarge),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.add))
-                ],
-              ),
-              _SearchField(),
-                Consumer<DiscussionSearch>(builder: (context, search, child) {
-                  return DiscussionList(searchTerm: search.value);
-                })
-            ],
-          ))),
+      body: _SearchProvider(
+          child: Column(
+        children: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 34.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineLarge!
+                            .copyWith(fontSize: 28.0)),
+                    IconButton(onPressed: () {}, icon: const Icon(Icons.add))
+                  ],
+                ),
+                const SizedBox(height: 13),
+                _SearchField(),
+              ],
+            ),
+          ),
+          Consumer<DiscussionSearch>(
+              builder: (context, search, child) =>
+                  DiscussionList(searchTerm: search.value))
+        ],
+      )),
     );
   }
 }

@@ -28,10 +28,10 @@ class AuthScreenSwitcher extends StatefulWidget {
   const AuthScreenSwitcher({super.key});
 
   @override
-  State<AuthScreenSwitcher> createState() => _AuthScreenSwitcher();
+  State<AuthScreenSwitcher> createState() => _AuthScreenSwitcherState();
 }
 
-class _AuthScreenSwitcher extends State<AuthScreenSwitcher> {
+class _AuthScreenSwitcherState extends State<AuthScreenSwitcher> {
   bool _isLoggedIn = false;
   bool _isLoading = false;
 

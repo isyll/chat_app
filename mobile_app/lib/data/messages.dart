@@ -1,0 +1,121 @@
+import 'package:chat_app/data/datetime.dart';
+import 'package:chat_app/models/latest_message.dart';
+import 'package:chat_app/models/user.dart';
+
+final class MessagesData {
+  static final latestMssages = [
+    LatestMessageModel(
+        id: '112',
+        user: const UserModel(userId: '1', name: 'Thousend Seary'),
+        content: 'Quoi de neuf, comment vas-tu ?',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 3),
+    LatestMessageModel(
+        id: '1323',
+        user: const UserModel(userId: '2', name: 'Forest Kroch'),
+        content: 'Je t\'ai envoyés toutes les données',
+        incoming: false,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 1),
+    LatestMessageModel(
+        id: '13234',
+        user: const UserModel(userId: '3', name: 'Byrom Guittet'),
+        content: 'Bonne chance',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324245',
+        user: const UserModel(userId: '4', name: 'Margaretta Worvell'),
+        content: 'Bonne chance',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324245',
+        user: const UserModel(userId: '5', name: 'Marvin Rohan'),
+        content: 'As-tu préparé les repas?',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324245',
+        user: const UserModel(userId: '6', name: 'Townsend Seary'),
+        content: 'Ou est-tu?',
+        incoming: false,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324245',
+        user: const UserModel(userId: '7', name: 'Gibb Ivanchin'),
+        content: 'Je veux les voir',
+        incoming: false,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324248',
+        user: const UserModel(userId: '8', name: 'Harald Kowalski'),
+        content: 'Les rapports sont établis',
+        incoming: false,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324248',
+        user: const UserModel(userId: '9', name: 'Afton McGilvra'),
+        content:
+            'je ne sais pas ou ils sont, ne me demande plus des choses que je suis incapable de faire',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324241',
+        user: const UserModel(userId: '10', name: 'Alexandr Donnelly'),
+        content: 'pouvez-vous rejoindre la réunion s\'il vous plaît',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '123249',
+        user: const UserModel(userId: '11', name: 'Jason Starm'),
+        content: 'je m\'en fous',
+        incoming: false,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324241',
+        user: const UserModel(userId: '12', name: 'Lunar Leene'),
+        content: 'pardon pour mon insistance',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324241',
+        user: const UserModel(userId: '13', name: 'Lamber False'),
+        content: 'je suis désespéré',
+        incoming: false,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+    LatestMessageModel(
+        id: '12324241',
+        user: const UserModel(userId: '14', name: 'Kylie Jenner'),
+        content: 'cela se trouve dehors',
+        incoming: true,
+        attachments: [],
+        date: generateRandomDateTimeWithinOneYear(),
+        unread: 0),
+  ];
+}
