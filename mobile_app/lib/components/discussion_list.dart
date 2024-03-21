@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:chat_app/components/discussion_item.dart';
 import 'package:chat_app/models/latest_message.dart';
 import 'package:chat_app/services/api.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class DiscussionList extends StatefulWidget {
@@ -15,18 +18,35 @@ class DiscussionList extends StatefulWidget {
 class _DiscussionListState extends State<DiscussionList> {
   List<LatestMessageModel> _discussionList = [];
   bool _isLoading = false;
+  bool _error = false;
 
   String get searchTerm => widget.searchTerm;
 
-  Future<void> fetchLatestMessages() async {
+  Future<void> _fetchLatestMessages() async {
     setState(() {
       _isLoading = true;
+      _error = false;
     });
-    final response = await ApiService.getLatestMessages();
-    setState(() {
-      _discussionList = response;
-      _isLoading = false;
-    });
+    try {
+      final response = await ApiService.getLatestMessages();
+      if (response.statusCode == 200) {
+        setState(() {
+          final data = jsonDecode(response.body) as List<LatestMessageModel>;
+          _discussionList = data;
+        });
+      } else {
+        throw Exception('http code ${response.statusCode}');
+      }
+    } catch (error) {
+      _error = true;
+      if (kDebugMode) {
+        print('Error $error\n');
+      }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   List<Widget> getDiscussionItems() =>
@@ -35,7 +55,7 @@ class _DiscussionListState extends State<DiscussionList> {
   @override
   void initState() {
     super.initState();
-    fetchLatestMessages();
+    _fetchLatestMessages();
   }
 
   @override

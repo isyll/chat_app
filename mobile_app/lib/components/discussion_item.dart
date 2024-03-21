@@ -1,7 +1,6 @@
 import 'package:chat_app/models/latest_message.dart';
 import 'package:chat_app/utils/string.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class DiscussionItem extends StatelessWidget {
   const DiscussionItem({super.key, required this.message});
