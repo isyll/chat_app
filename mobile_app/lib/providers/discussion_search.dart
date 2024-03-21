@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DiscussionSearch extends ChangeNotifier {
+class DiscussionSearchProvider extends ChangeNotifier {
   String _value = '';
 
   String get value => _value;

@@ -1,10 +1,48 @@
 import 'package:chat_app/components/discussion_list.dart';
+import 'package:chat_app/components/discussion_loader.dart';
+import 'package:chat_app/models/latest_message.dart';
 import 'package:chat_app/providers/discussion_search.dart';
+import 'package:chat_app/services/api.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DiscussionScreen extends StatelessWidget {
+class DiscussionScreen extends StatefulWidget {
   const DiscussionScreen({super.key});
+
+  @override
+  State<DiscussionScreen> createState() => _DiscussionScreenState();
+}
+
+class _DiscussionScreenState extends State<DiscussionScreen> {
+  List<LatestMessageModel> _discussionList = [];
+  bool _isLoading = false;
+
+  Future<void> _fetchLatestMessages() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      final response = await ApiService.getLatestMessages();
+      setState(() {
+        _discussionList = response;
+      });
+    } catch (error) {
+      if (kDebugMode) {
+        print('Error $error\n');
+      }
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchLatestMessages();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +50,7 @@ class DiscussionScreen extends StatelessWidget {
 
     return Scaffold(
       body: ChangeNotifierProvider(
-          create: (context) => DiscussionSearch(),
+          create: (context) => DiscussionSearchProvider(),
           child: Column(
             children: [
               Padding(
@@ -37,9 +75,12 @@ class DiscussionScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Consumer<DiscussionSearch>(
-                  builder: (context, search, child) =>
-                      DiscussionList(searchTerm: search.value))
+              _isLoading
+                  ? const DiscussionLoader()
+                  : Consumer<DiscussionSearchProvider>(
+                      builder: (context, search, child) => DiscussionList(
+                          discussionList: _discussionList,
+                          searchTerm: search.value))
             ],
           )),
     );
@@ -51,7 +92,7 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final discussionSearch = context.watch<DiscussionSearch>();
+    final discussionSearch = context.watch<DiscussionSearchProvider>();
 
     return TextField(
         controller: _controller,
