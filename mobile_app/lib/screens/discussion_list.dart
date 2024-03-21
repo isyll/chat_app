@@ -11,35 +11,37 @@ class DiscussionListScreen extends StatelessWidget {
     const title = 'Discussions';
 
     return Scaffold(
-      body: _SearchProvider(
+      body: ChangeNotifierProvider(
+          create: (context) => DiscussionSearch(),
           child: Column(
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 34.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 34.0),
+                child: Column(
                   children: [
-                    Text(title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(fontSize: 28.0)),
-                    IconButton(onPressed: () {}, icon: const Icon(Icons.add))
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge!
+                                .copyWith(fontSize: 28.0)),
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.add))
+                      ],
+                    ),
+                    const SizedBox(height: 13),
+                    _SearchField(),
                   ],
                 ),
-                const SizedBox(height: 13),
-                _SearchField(),
-              ],
-            ),
-          ),
-          Consumer<DiscussionSearch>(
-              builder: (context, search, child) =>
-                  DiscussionList(searchTerm: search.value))
-        ],
-      )),
+              ),
+              Consumer<DiscussionSearch>(
+                  builder: (context, search, child) =>
+                      DiscussionList(searchTerm: search.value))
+            ],
+          )),
     );
   }
 }
@@ -59,14 +61,4 @@ class _SearchField extends StatelessWidget {
             border: Theme.of(context).inputDecorationTheme.border),
         onSubmitted: (value) => discussionSearch.value = value);
   }
-}
-
-class _SearchProvider extends StatelessWidget {
-  const _SearchProvider({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => DiscussionSearch(), child: child);
 }

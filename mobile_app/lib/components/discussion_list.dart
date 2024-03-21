@@ -39,9 +39,9 @@ class _DiscussionListState extends State<DiscussionList> {
     }
   }
 
-  List<Widget> getDiscussionItems() =>
+  List<Widget> get _getDiscussionItems =>
       LatestMessageModel.filter(searchTerm, _discussionList)
-          .map((item) => DiscussionItem(message: item))
+          .map((m) => DiscussionItem(message: m))
           .toList();
 
   @override
@@ -64,7 +64,7 @@ class _DiscussionListState extends State<DiscussionList> {
       height: 2,
       thickness: 1,
     );
-    final items = getDiscussionItems();
+    final items = _getDiscussionItems;
 
     return Expanded(
         child: ListView.separated(

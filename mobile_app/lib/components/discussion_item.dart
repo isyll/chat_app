@@ -19,8 +19,9 @@ class DiscussionItem extends StatelessWidget {
           child: Image.asset('assets/icons8-avatar-96.png'),
         ),
         const SizedBox(width: 10.0),
-        Column(
-            mainAxisSize: MainAxisSize.min,
+        Expanded(
+            child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (message.unread != 0)
@@ -29,7 +30,7 @@ class DiscussionItem extends StatelessWidget {
                 children: [
                   Text(
                     message.user.name,
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    style: headlineSmall!.copyWith(
                         color: primaryColor, fontWeight: FontWeight.normal),
                   ),
                   Container(
@@ -53,7 +54,7 @@ class DiscussionItem extends StatelessWidget {
               ),
             Flexible(child: Text(truncateString(message.content, 65)))
           ],
-        )
+        ))
       ],
     );
   }
