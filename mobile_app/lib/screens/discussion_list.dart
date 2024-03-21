@@ -57,10 +57,7 @@ class _SearchField extends StatelessWidget {
             hintText: 'Rechercher une discussion',
             hintStyle: Theme.of(context).textTheme.bodyMedium,
             border: Theme.of(context).inputDecorationTheme.border),
-        onSubmitted: (value) {
-          _controller.clear();
-          discussionSearch.value = value;
-        });
+        onSubmitted: (value) => discussionSearch.value = value);
   }
 }
 

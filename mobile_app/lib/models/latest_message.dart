@@ -11,4 +11,16 @@ class LatestMessageModel extends MessageModel {
       required this.unread});
 
   final int unread;
+
+  static List<LatestMessageModel> filter(
+      String searchTerm, List<LatestMessageModel> messages) {
+    searchTerm = searchTerm.trim().toLowerCase();
+    return searchTerm.isEmpty
+        ? messages
+        : messages
+            .where((m) =>
+                m.content.toLowerCase().contains(searchTerm) ||
+                m.user.name.toLowerCase().contains(searchTerm))
+            .toList();
+  }
 }
