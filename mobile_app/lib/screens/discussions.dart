@@ -3,8 +3,8 @@ import 'package:chat_app/providers/discussion_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DiscussionListScreen extends StatelessWidget {
-  const DiscussionListScreen({super.key});
+class DiscussionScreen extends StatelessWidget {
+  const DiscussionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

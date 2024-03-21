@@ -1,5 +1,5 @@
 import 'package:chat_app/config/constants.dart';
-import 'package:chat_app/screens/discussion_list.dart';
+import 'package:chat_app/screens/discussions.dart';
 import 'package:chat_app/screens/loader.dart';
 import 'package:chat_app/screens/login.dart';
 import 'package:chat_app/services/auth.dart';
@@ -58,7 +58,7 @@ class _AuthScreenSwitcherState extends State<AuthScreenSwitcher> {
     if (_isLoading) {
       return const LoaderScreen();
     } else if (_isLoggedIn) {
-      return const DiscussionListScreen();
+      return const DiscussionScreen();
     }
 
     return const LoginScreen();
