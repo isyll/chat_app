@@ -3,11 +3,9 @@ import 'package:chat_app/components/discussion_loader.dart';
 import 'package:chat_app/data/menu.dart';
 import 'package:chat_app/models/latest_message.dart';
 import 'package:chat_app/providers/discussion_search.dart';
-import 'package:chat_app/services/api.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:chat_app/services/api_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class DiscussionScreen extends StatefulWidget {

@@ -1,5 +1,5 @@
-import 'package:chat_app/screens/archived.dart';
-import 'package:chat_app/screens/settings.dart';
+import 'package:chat_app/screens/archived_screen.dart';
+import 'package:chat_app/screens/settings_screen.dart';
 
 const List<Map<String, dynamic>> menuItems =
 [

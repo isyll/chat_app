@@ -1,8 +1,8 @@
 import 'package:chat_app/config/constants.dart';
-import 'package:chat_app/screens/discussions.dart';
-import 'package:chat_app/screens/loader.dart';
-import 'package:chat_app/screens/login.dart';
-import 'package:chat_app/services/auth.dart';
+import 'package:chat_app/screens/discussions_screen.dart';
+import 'package:chat_app/screens/loader_screen.dart';
+import 'package:chat_app/screens/login_screen.dart';
+import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
