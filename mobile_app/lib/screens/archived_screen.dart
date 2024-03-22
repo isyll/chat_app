@@ -10,6 +10,6 @@ class ArchivedScreen extends StatefulWidget {
 class _ArchivedScreenState extends State<ArchivedScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(body: Center(child: Text('Archivés')));
   }
 }

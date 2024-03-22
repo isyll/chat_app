@@ -61,6 +61,8 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
   @override
   Widget build(BuildContext context) {
     const title = 'Discussions';
+    final titleStyle =
+        Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 28.0);
     final dropdownItems = menuItems
         .map((menuItem) => DropdownMenuItem<String>(
               value: menuItem['value'],
@@ -81,11 +83,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(fontSize: 28.0)),
+                        Text(title, style: titleStyle),
                         const Spacer(),
                         SizedBox(
                             width: 0,
