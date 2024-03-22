@@ -35,7 +35,7 @@ class _AuthScreenSwitcherState extends State<AuthScreenSwitcher> {
   bool _isLoggedIn = false;
   bool _isLoading = false;
 
-  Future<void> _checkIfUserLoggedIn() async {
+  Future<void> checkIfUserLoggedIn() async {
     setState(() {
       _isLoggedIn = false;
       _isLoading = true;
@@ -50,7 +50,7 @@ class _AuthScreenSwitcherState extends State<AuthScreenSwitcher> {
   @override
   void initState() {
     super.initState();
-    _checkIfUserLoggedIn();
+    checkIfUserLoggedIn();
   }
 
   @override

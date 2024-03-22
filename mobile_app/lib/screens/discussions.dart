@@ -1,10 +1,13 @@
 import 'package:chat_app/components/discussion_list.dart';
 import 'package:chat_app/components/discussion_loader.dart';
+import 'package:chat_app/data/menu.dart';
 import 'package:chat_app/models/latest_message.dart';
 import 'package:chat_app/providers/discussion_search.dart';
 import 'package:chat_app/services/api.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class DiscussionScreen extends StatefulWidget {
@@ -18,7 +21,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
   List<LatestMessageModel> _discussionList = [];
   bool _isLoading = false;
 
-  Future<void> _fetchLatestMessages() async {
+  Future<void> fetchLatestMessages() async {
     setState(() {
       _isLoading = true;
     });
@@ -41,12 +44,31 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchLatestMessages();
+    fetchLatestMessages();
+  }
+
+  Map<String, dynamic> findMenuItemByValue(String value) {
+    try {
+      return menuItems.where((element) => element['value'] == value).first;
+    } catch (error) {
+      throw StateError('Value $value not found in menuItems');
+    }
+  }
+
+  void _switchScreen(String? value) {
+    final Widget screen = findMenuItemByValue(value!)['screen'];
+    Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
   }
 
   @override
   Widget build(BuildContext context) {
     const title = 'Discussions';
+    final dropdownItems = menuItems
+        .map((menuItem) => DropdownMenuItem<String>(
+              value: menuItem['value'],
+              child: Text(menuItem['label']),
+            ))
+        .toList();
 
     return Scaffold(
       body: ChangeNotifierProvider(
@@ -59,15 +81,31 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(title,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!
                                 .copyWith(fontSize: 28.0)),
-                        IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.add))
+                        const Spacer(),
+                        SizedBox(
+                            width: 0,
+                            child: IconButton(
+                                alignment: Alignment.centerRight,
+                                iconSize: 28,
+                                onPressed: () {},
+                                icon: const Icon(Icons.add))),
+                        DropdownButton(
+                            underline: Container(
+                              height: 0,
+                              width: 0,
+                              color: Colors.transparent,
+                            ),
+                            iconSize: 28,
+                            icon: const Icon(Icons.menu),
+                            items: dropdownItems,
+                            onChanged: _switchScreen),
                       ],
                     ),
                     const SizedBox(height: 13),
