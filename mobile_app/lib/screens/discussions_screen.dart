@@ -1,8 +1,9 @@
 import 'package:chat_app/components/discussion_list.dart';
 import 'package:chat_app/components/discussion_loader.dart';
-import 'package:chat_app/data/menu.dart';
 import 'package:chat_app/models/latest_message.dart';
 import 'package:chat_app/providers/discussion_search.dart';
+import 'package:chat_app/screens/archived_screen.dart';
+import 'package:chat_app/screens/settings_screen.dart';
 import 'package:chat_app/services/api_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,14 @@ class DiscussionScreen extends StatefulWidget {
 class _DiscussionScreenState extends State<DiscussionScreen> {
   List<LatestMessageModel> _discussionList = [];
   bool _isLoading = false;
+  final List<Map<String, dynamic>> _menuItems = [
+    {
+      'label': 'Réglages',
+      'value': 'settings',
+      'screen': const SettingsScreen()
+    },
+    {'label': 'Archivés', 'value': 'archived', 'screen': const ArchivedScreen()}
+  ];
 
   Future<void> fetchLatestMessages() async {
     setState(() {
@@ -47,7 +56,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
 
   Map<String, dynamic> findMenuItemByValue(String value) {
     try {
-      return menuItems.where((element) => element['value'] == value).first;
+      return _menuItems.where((element) => element['value'] == value).first;
     } catch (error) {
       throw StateError('Value $value not found in menuItems');
     }
@@ -63,7 +72,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
     const title = 'Discussions';
     final titleStyle =
         Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 28.0);
-    final dropdownItems = menuItems
+    final dropdownItems = _menuItems
         .map((menuItem) => DropdownMenuItem<String>(
               value: menuItem['value'],
               child: Text(menuItem['label']),
