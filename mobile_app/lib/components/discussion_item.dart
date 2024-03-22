@@ -11,6 +11,7 @@ class DiscussionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
     final headlineSmall = Theme.of(context).textTheme.headlineSmall;
+    final prefix = message.incoming ? '' : 'Vous: ';
 
     return Row(
       children: [
@@ -52,7 +53,20 @@ class DiscussionItem extends StatelessWidget {
                 message.user.name,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
-            Flexible(child: Text(truncateString(message.content, 65)))
+            Flexible(
+                child: prefix.isNotEmpty
+                    ? Row(
+                        children: [
+                          Text(
+                            prefix,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic),
+                          ),
+                          Text(truncateString(message.content, 65))
+                        ],
+                      )
+                    : Text(truncateString(message.content, 65)))
           ],
         ))
       ],
