@@ -10,6 +10,7 @@ class DiscussionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primaryColor = Theme.of(context).colorScheme.primary;
+    final onPrimaryColor = Theme.of(context).colorScheme.onPrimary;
     final headlineSmall = Theme.of(context).textTheme.headlineSmall;
     final prefix = message.incoming ? '' : 'Vous: ';
 
@@ -35,16 +36,13 @@ class DiscussionItem extends StatelessWidget {
                         color: primaryColor, fontWeight: FontWeight.normal),
                   ),
                   Container(
+                    alignment: Alignment.center,
                     width: 24,
                     height: 24,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle, color: primaryColor),
-                    child: Center(
-                      child: Text(
-                        message.unread.toString(),
-                        style: headlineSmall,
-                      ),
-                    ),
+                    child: Text(message.unread.toString(),
+                        style: headlineSmall.copyWith(color: onPrimaryColor)),
                   )
                 ],
               ),

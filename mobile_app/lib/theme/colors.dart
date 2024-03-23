@@ -5,6 +5,7 @@ class AppColors {
       onBackground: Color(0xffc6c8cd),
       background: Color(0xff1a2236),
       primary: Color(0xff0a80ff),
+      onPrimary: Colors.white,
       secondary: Color(0xffc6c8cd),
       tertiary: Color(0xff333b4f));
 
@@ -12,6 +13,7 @@ class AppColors {
       onBackground: Color(0xff212529),
       background: Colors.white,
       primary: Color(0xff0a80ff),
+      onPrimary: Colors.white,
       secondary: Color(0xff212529),
       tertiary: Color(0xffe6e6e6));
 }
