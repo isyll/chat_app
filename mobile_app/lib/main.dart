@@ -1,13 +1,18 @@
 import 'package:chat_app/config/constants.dart';
+import 'package:chat_app/providers/theme_provider.dart';
 import 'package:chat_app/screens/discussions_screen.dart';
 import 'package:chat_app/screens/loader_screen.dart';
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:chat_app/services/auth_service.dart';
 import 'package:chat_app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const App());
+  runApp(ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: const App(),
+  ));
 }
 
 class App extends StatelessWidget {
@@ -17,8 +22,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: Constants.appName,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
+      theme: Provider.of<ThemeProvider>(context).darkMode
+          ? AppTheme.darkTheme
+          : AppTheme.lightTheme,
       home: const AuthScreenSwitcher(),
     );
   }

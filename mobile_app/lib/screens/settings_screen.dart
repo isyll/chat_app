@@ -1,6 +1,8 @@
 import 'package:chat_app/config/constants.dart';
+import 'package:chat_app/providers/theme_provider.dart';
 import 'package:chat_app/theme/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -10,7 +12,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  late bool _isDark;
+  bool? _isDark;
   late String _locale;
   AppStyles? styles;
 
@@ -22,12 +24,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
     // recupérer les données
     styles = AppStyles(context);
-    _isDark = false;
     _locale = 'fr';
   }
 
   @override
   Widget build(BuildContext context) {
+    _isDark = Provider.of<ThemeProvider>(context).darkMode;
     final settingItems = [
       [
         Text(
@@ -35,9 +37,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: styles!.labelStyle,
         ),
         Switch(
-          value: _isDark,
+          value: _isDark!,
           onChanged: (value) => setState(() {
             _isDark = value;
+            Provider.of<ThemeProvider>(context, listen: false).darkMode = value;
           }),
         )
       ],
