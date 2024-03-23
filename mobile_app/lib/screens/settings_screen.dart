@@ -1,4 +1,5 @@
 import 'package:chat_app/config/constants.dart';
+import 'package:chat_app/theme/styles.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   late bool _isDark;
   late String _locale;
+  AppStyles? styles;
 
   Map<String, String> getLocale(String value) =>
       Constants.locales.where((locale) => locale['lang'] == value).first;
@@ -19,28 +21,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     super.initState();
     // recupérer les données
+    styles = AppStyles(context);
     _isDark = false;
     _locale = 'fr';
   }
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle =
-        Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 28.0);
-    final labelStyle = Theme.of(context)
-        .textTheme
-        .headlineSmall!
-        .copyWith(fontWeight: FontWeight.normal, fontSize: 20);
-    final divider = Divider(
-      color: Theme.of(context).colorScheme.tertiary,
-      height: 2,
-      thickness: 1,
-    );
     final settingItems = [
       [
         Text(
           'Thème sombre',
-          style: labelStyle,
+          style: styles!.labelStyle,
         ),
         Switch(
           value: _isDark,
@@ -52,7 +44,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       [
         Text(
           'Langue',
-          style: labelStyle,
+          style: styles!.labelStyle,
         ),
         DropdownMenu(
             onSelected: (value) => setState(() {
@@ -81,7 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     icon: const Icon(Icons.arrow_back_ios)),
                 Text(
                   'Réglages',
-                  style: titleStyle,
+                  style: styles!.titleStyle,
                 )
               ],
             )),
@@ -89,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: ListView.separated(
           padding: EdgeInsets.zero,
           itemCount: settingItems.length,
-          separatorBuilder: (context, index) => divider,
+          separatorBuilder: (context, index) => styles!.divider,
           itemBuilder: (context, index) => Padding(
             padding:
                 const EdgeInsets.only(right: 40, left: 40, top: 10, bottom: 10),

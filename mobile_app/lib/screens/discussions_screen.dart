@@ -5,6 +5,7 @@ import 'package:chat_app/providers/discussion_search.dart';
 import 'package:chat_app/screens/archived_screen.dart';
 import 'package:chat_app/screens/settings_screen.dart';
 import 'package:chat_app/services/api_service.dart';
+import 'package:chat_app/theme/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
     },
     {'label': 'Archivés', 'value': 'archived', 'screen': const ArchivedScreen()}
   ];
+  AppStyles? styles;
 
   Future<void> fetchLatestMessages() async {
     setState(() {
@@ -52,6 +54,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
   void initState() {
     super.initState();
     fetchLatestMessages();
+    styles = AppStyles(context);
   }
 
   Map<String, dynamic> findMenuItemByValue(String value) {
@@ -70,8 +73,6 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
   @override
   Widget build(BuildContext context) {
     const title = 'Discussions';
-    final titleStyle =
-        Theme.of(context).textTheme.headlineLarge!.copyWith(fontSize: 28.0);
     final dropdownItems = _menuItems
         .map((menuItem) => DropdownMenuItem<String>(
               value: menuItem['value'],
@@ -92,7 +93,7 @@ class _DiscussionScreenState extends State<DiscussionScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(title, style: titleStyle),
+                        Text(title, style: styles!.titleStyle),
                         const Spacer(),
                         SizedBox(
                             width: 0,
