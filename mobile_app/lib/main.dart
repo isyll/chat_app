@@ -4,6 +4,7 @@ import 'package:chat_app/screens/discussions_screen.dart';
 import 'package:chat_app/screens/loader_screen.dart';
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:chat_app/services/auth_service.dart';
+import 'package:chat_app/services/storage_service.dart';
 import 'package:chat_app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,27 +41,53 @@ class AuthScreenSwitcher extends StatefulWidget {
 class _AuthScreenSwitcherState extends State<AuthScreenSwitcher> {
   bool _isLoggedIn = false;
   bool _isLoading = false;
+  bool? _darkMode;
+  Brightness? _platformBrightness;
 
   Future<void> checkIfUserLoggedIn() async {
     setState(() {
       _isLoggedIn = false;
-      _isLoading = true;
     });
     final bool res = await AuthService.isUserAuthenticated();
     setState(() {
       _isLoggedIn = res;
-      _isLoading = false;
     });
+  }
+
+  Future<void> loadTheme() async {
+    final isDarkMode = _platformBrightness == Brightness.dark;
+    final provider = Provider.of<ThemeProvider>(context, listen: false);
+
+    _darkMode = await StorageService.getDarkMode(isDarkMode);
+    provider.darkMode = _darkMode!;
   }
 
   @override
   void initState() {
     super.initState();
-    checkIfUserLoggedIn();
+
+    Future.wait([checkIfUserLoggedIn(), loadTheme()])
+        .then((value) => setState(() {
+              _isLoading = false;
+            }));
   }
 
   @override
   Widget build(BuildContext context) {
+    _platformBrightness = MediaQuery.of(context).platformBrightness;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    Future.wait([checkIfUserLoggedIn(), loadTheme()])
+        .then((value) => setState(() {
+              _isLoading = false;
+            }));
+
+    setState(() {
+      _isLoading = false;
+    });
     if (_isLoading) {
       return const LoaderScreen();
     } else if (_isLoggedIn) {
